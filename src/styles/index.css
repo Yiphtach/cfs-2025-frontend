@@ -1,0 +1,55 @@
+/* src/styles/index.css - Global Styles */
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&display=swap');
+
+/* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Comic Neue', cursive;
+}
+
+body {
+    background-color: #121212;
+    color: #fff;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Buttons */
+.button {
+    background: #ff4500;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.button:hover {
+    background: #e63900;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 1s ease-in;
+}

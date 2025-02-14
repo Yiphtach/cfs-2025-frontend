@@ -1,9 +1,9 @@
-import axios from './apiClient';  // Axios instance for consistent API calls
+import apiClient from './apiClient';  // Axios instance for consistent API calls
 
 // Register a new user
 export const registerUser = async (userData) => {
     try {
-        const response = await axios.post('/api/auth/register', userData);
+        const response = await apiClient.post('/auth/register', userData);
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: 'Registration failed' };
@@ -13,7 +13,7 @@ export const registerUser = async (userData) => {
 // Login user
 export const loginUser = async (credentials) => {
     try {
-        const response = await axios.post('/api/auth/login', credentials);
+        const response = await apiClient.post('/auth/login', credentials);
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: 'Login failed' };
@@ -21,11 +21,9 @@ export const loginUser = async (credentials) => {
 };
 
 // Fetch authenticated user details
-export const getUserProfile = async (token) => {
+export const getUserProfile = async () => {
     try {
-        const response = await axios.get('/api/auth/user', {
-            headers: { Authorization: `Bearer ${token}` }
-        });
+        const response = await apiClient.get('/auth/user');
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: 'Failed to fetch user' };

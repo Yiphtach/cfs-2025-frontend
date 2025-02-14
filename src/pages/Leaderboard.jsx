@@ -17,7 +17,7 @@ const Leaderboard = () => {
             const data = await getLeaderboard();
             setLeaderboard(data);
         } catch (error) {
-            setError("Failed to load leaderboard. Please try again.");
+            setError(`Failed to load leaderboard: ${error.message}`);
         } finally {
             setIsLoading(false);
         }

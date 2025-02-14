@@ -28,7 +28,7 @@ const NotFound = () => {
         <div className="not-found-container">
             <img src={notFoundImage} alt="404 Not Found" className="not-found-image" />
             <h1>404 - Page Not Found</h1>
-            <p>Oops! The page you're looking for does not exist.</p>
+            <p>Oops! The page you&apos;re looking for does not exist.</p>
             <p>Redirecting to home in {countdown} seconds...</p>
 
             <form onSubmit={handleSearch}>

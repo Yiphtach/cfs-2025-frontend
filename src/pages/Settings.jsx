@@ -19,7 +19,7 @@ const Settings = () => {
             const data = await getUserSettings();
             setUser(data);
         } catch (error) {
-            setError("Failed to load settings. Please try again.");
+            setError(`Failed to load settings: ${error.message}`);
         } finally {
             setIsLoading(false);
         }
@@ -43,7 +43,7 @@ const Settings = () => {
             await updateUserSettings(user);
             setSuccess("Settings updated successfully!");
         } catch (error) {
-            setError("Failed to update settings.");
+            setError(`Failed to update settings: ${error.message}`);
         }
     };
 
