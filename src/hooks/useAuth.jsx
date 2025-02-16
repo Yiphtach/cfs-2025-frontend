@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     const register = async (credentials) => {
-        const { data } = await axios.post("/auth/register", credentials);
+        await axios.post("/auth/register", credentials);
         login(credentials);  // Automatically log in after registration
     };
 

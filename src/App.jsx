@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Fighters from './pages/Fighters';
 import FightSimulator from './pages/FightSimulator';
@@ -18,7 +18,6 @@ function App() {
         <AuthProvider>
             <FighterProvider>
                 <FightProvider>
-                    <Router>
                         <Header />
                         <Routes>
                             <Route path="/" element={<Home />} />
@@ -30,7 +29,6 @@ function App() {
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                         <Footer />
-                    </Router>
                 </FightProvider>
             </FighterProvider>
         </AuthProvider>
