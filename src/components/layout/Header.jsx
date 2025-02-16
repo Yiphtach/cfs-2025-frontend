@@ -12,7 +12,6 @@ const Header = () => {
                     <ul className="flex space-x-4">
                         <li><Link to="/fighters" className="hover:underline">Fighters</Link></li>
                         <li><Link to="/fight-simulator" className="hover:underline">Fight</Link></li>
-                        <li><Link to="/leaderboard" className="hover:underline">Leaderboard</Link></li>
                         <li><Link to="/profile" className="hover:underline">Profile</Link></li>
                     </ul>
                 </nav>
