@@ -8,6 +8,11 @@ export const searchFighterByName = async (name) => {
 
 // Fetch superhero details by ID
 export const getFighterById = async (id) => {
-    const { data } = await apiClient.get(`/id/${id}`);
-    return data;
+    try {
+        const { data } = await apiClient.get(`/id/${id}`);
+        return data;
+    } catch (error) {
+        console.error("Error fetching fighter details:", error);
+        throw error;
+    }
 };

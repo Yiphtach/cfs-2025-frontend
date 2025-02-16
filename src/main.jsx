@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App.jsx'
 import { AuthProvider } from './context/AuthContext';
 import { FighterProvider } from './context/FighterContext';
@@ -12,9 +12,9 @@ createRoot(document.getElementById('root')).render(
     <AuthProvider>
             <FighterProvider>
                 <FightProvider>
-                    <BrowserRouter>
+                    <Router>
                         <App />
-                    </BrowserRouter>
+                    </Router>
                 </FightProvider>
             </FighterProvider>
         </AuthProvider>

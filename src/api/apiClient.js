@@ -1,133 +1,120 @@
 import axios from "axios";
 
-const API_BASE_URL = 'https://superheroapi.com/api/e25a217cfe9babe1aae8ed7cd83112eb';
+// Base URL for the backend API (NOT the Superhero API directly)
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 
-// Set up the Axios instance with base URL
+// Create Axios instance
 const apiClient = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || "http://localhost:3000/api",
+    baseURL: API_BASE_URL,
     headers: {
         "Content-Type": "application/json",
     },
 });
 
-// Fetch superhero details by ID
+// Fetch character details by ID (from backend)
 export const fetchCharacterById = async (characterId) => {
     try {
-        const response = await apiClient.get(`${API_BASE_URL}/${characterId}`);
+        const response = await apiClient.get(`/id/${characterId}`);
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: 'Failed to fetch character' };
     }
 };
 
-// Fetch superhero power stats
+// Fetch character power stats
 export const fetchPowerStats = async (characterId) => {
     try {
-        const response = await apiClient.get(`${API_BASE_URL}/${characterId}/powerstats`);
+        const response = await apiClient.get(`/id/${characterId}/powerstats`);
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: 'Failed to fetch power stats' };
     }
 };
 
-// Fetch superhero biography
+// Fetch character biography
 export const fetchBiography = async (characterId) => {
     try {
-        const response = await apiClient.get(`${API_BASE_URL}/${characterId}/biography`);
+        const response = await apiClient.get(`/id/${characterId}/biography`);
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: 'Failed to fetch biography' };
     }
 };
 
-// Fetch superhero appearance details
+// Fetch character appearance
 export const fetchAppearance = async (characterId) => {
     try {
-        const response = await apiClient.get(`${API_BASE_URL}/${characterId}/appearance`);
+        const response = await apiClient.get(`/id/${characterId}/appearance`);
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: 'Failed to fetch appearance' };
     }
 };
 
-// Fetch superhero work details
+// Fetch character work details
 export const fetchWork = async (characterId) => {
     try {
-        const response = await apiClient.get(`${API_BASE_URL}/${characterId}/work`);
+        const response = await apiClient.get(`/id/${characterId}/work`);
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: 'Failed to fetch work details' };
     }
 };
 
-// Fetch superhero connections
+// Fetch character connections
 export const fetchConnections = async (characterId) => {
     try {
-        const response = await apiClient.get(`${API_BASE_URL}/${characterId}/connections`);
+        const response = await apiClient.get(`/id/${characterId}/connections`);
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: 'Failed to fetch connections' };
     }
 };
 
-// Fetch superhero image
+// Fetch character image
 export const fetchImage = async (characterId) => {
     try {
-        const response = await apiClient.get(`${API_BASE_URL}/${characterId}/image`);
+        const response = await apiClient.get(`/id/${characterId}/image`);
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: 'Failed to fetch image' };
     }
 };
 
-// Search for superheroes by name
+// Search for characters by name
 export const searchCharacterByName = async (name) => {
     try {
-        const response = await apiClient.get(`${API_BASE_URL}/search/${name}`);
+        const response = await apiClient.get(`/search/${name}`);
         return response.data;
     } catch (error) {
         throw error.response?.data || { message: 'Failed to search character' };
     }
 };
 
+// Get user settings
 export const getUserSettings = async () => {
     const response = await apiClient.get("/settings");
     return response.data;
-}
+};
 
-export const updateUserSettings = async () => {
-    const response = await apiClient.put("/settings");
-    return response.data;
-}
-
-export const getLeaderboard = async () => {
-    const response = await apiClient.get("/leaderboard");
+// Update user settings
+export const updateUserSettings = async (settings) => {
+    const response = await apiClient.put("/settings", settings);
     return response.data;
 };
 
+// Get user profile
 export const getUserProfile = async () => {
     const response = await apiClient.get("/profile");
     return response.data;
-}
+};
 
+// Get fighter by ID
 export const getFighterById = async (id) => {
     const { data } = await apiClient.get(`/id/${id}`);
     return data;
-}
-
-export default {
-    fetchCharacterById,
-    fetchPowerStats,
-    fetchBiography,
-    fetchAppearance,
-    fetchWork,
-    fetchConnections,
-    fetchImage,
-    searchCharacterByName,
-    getUserSettings,
-    updateUserSettings,
-    getLeaderboard,
-    getUserProfile,
-    getFighterById,
-    apiClient
 };
+
+// Export API Client
+export default { apiClient };
+// In this example, we have created an API client using Axios to make HTTP requests to the backend API. We have defined several functions to fetch character details, search for characters by name, and get user settings and profile. We have also exported the API client instance to be used in other parts of the application.
