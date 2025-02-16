@@ -86,6 +86,10 @@ export const getUserSettings = async () => {}
 
 export const updateUserSettings = async () => {}
 
+export const getLeaderboard = async () => {}
+
+export const getUserProfile = async () => {}
+
 export default {
     fetchCharacterById,
     fetchPowerStats,
@@ -96,5 +100,7 @@ export default {
     fetchImage,
     searchCharacterByName,
     getUserSettings,
-    updateUserSettings
+    updateUserSettings,
+    getLeaderboard,
+    getUserProfile
 };

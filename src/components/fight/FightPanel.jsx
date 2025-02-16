@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PropTypes from 'prop-types';
 import punchSound from "../assets/punch.mp3";
 
 const defaultImage = "https://via.placeholder.com/150?text=No+Image";
@@ -49,5 +50,18 @@ const FightPanel = ({ fighter1, fighter2, fightSequence, winner }) => {
         </div>
     );
 };
+FightPanel.propTypes = {
+    fighter1: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        image: PropTypes.string
+    }).isRequired,
+    fighter2: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        image: PropTypes.string
+    }).isRequired,
+    fightSequence: PropTypes.arrayOf(PropTypes.string).isRequired,
+    winner: PropTypes.string
+};
+
 
 export default FightPanel;

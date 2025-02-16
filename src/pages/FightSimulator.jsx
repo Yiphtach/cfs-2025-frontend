@@ -37,7 +37,7 @@ const FightSimulator = () => {
                 setWinner(data.winner);
             }, 3000); // Simulate fight delay
         } catch (error) {
-            setError("Fight simulation failed. Please try again.");
+            setError(`Fight simulation failed: ${error.message}`);
         } finally {
             setIsLoading(false);
         }
@@ -48,8 +48,8 @@ const FightSimulator = () => {
             <h1>Superhero Fight Simulator</h1>
 
             <div className="fighter-selection">
-                <FighterCard fighter={fighter1} />
-                <FighterCard fighter={fighter2} />
+                <FighterCard fighter={fighter1} onSelect={setFighter1} />
+                <FighterCard fighter={fighter2} onSelect={setFighter2} />
             </div>
 
             {error && <p className="error-message">{error}</p>}

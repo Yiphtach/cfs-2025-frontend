@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { searchFighterByName } from "../../api/fighterApi";
 import FighterCard from "./FighterCard";
 
@@ -12,20 +12,20 @@ const FighterSearch = () => {
         if (searchTerm.length > 2) {
             handleSearch();
         }
-    }, [searchTerm]);
+    }, [searchTerm, handleSearch]);
 
-    const handleSearch = async () => {
+    const handleSearch = useCallback(async () => {
         setError("");
         setIsLoading(true);
         try {
             const data = await searchFighterByName(searchTerm);
             setFighters(data.results || []);
-        } catch (error) {
-            setError("Failed to load superheroes. Please try again.");
+        } catch (err) {
+            setError(`Failed to load superheroes: ${err.message}`);
         } finally {
             setIsLoading(false);
         }
-    };
+    }, [searchTerm]);
 
     return (
         <div className="fighter-search-container">

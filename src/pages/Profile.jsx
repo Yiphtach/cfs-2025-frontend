@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getUserProfile } from "../api/profileApi";
+import { getUserProfile } from "../api/apiClient";
 
 const Profile = () => {
     const [user, setUser] = useState(null);
@@ -19,7 +19,7 @@ const Profile = () => {
             setUser(data.user);
             setFightHistory(data.fights);
         } catch (error) {
-            setError("Failed to load profile. Please try again.");
+            setError(`Failed to load profile: ${error.message}`);
         } finally {
             setIsLoading(false);
         }
@@ -38,7 +38,7 @@ const Profile = () => {
                 <p>Loading profile...</p>
             ) : user ? (
                 <>
-                    <h2>{user.username}'s Profile</h2>
+                    <h2>{user.username}&apos;s Profile</h2>
                     <p>Email: {user.email}</p>
 
                     <div className="xp-bar">

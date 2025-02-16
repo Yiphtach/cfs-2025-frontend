@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { searchFighterByName } from "../api/fighterApi";
 import FighterCard from "../components/fighters/FighterCard";
@@ -10,24 +10,24 @@ const Home = () => {
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (searchTerm.length > 2) {
-            fetchFighters();
-        }
-    }, [searchTerm]);
-
-    const fetchFighters = async () => {
+    const fetchFighters = useCallback(async () => {
         setError("");
         setIsLoading(true);
         try {
             const data = await searchFighterByName(searchTerm);
             setFighters(data.results || []);
         } catch (error) {
-            setError("Failed to load superheroes. Please try again.");
+            setError(`Failed to load superheroes: ${error.message}`);
         } finally {
             setIsLoading(false);
         }
-    };
+    }, [searchTerm]);
+
+    useEffect(() => {
+        if (searchTerm.length > 2) {
+            fetchFighters();
+        }
+    }, [searchTerm, fetchFighters]);
 
     return (
         <div className="home-container">

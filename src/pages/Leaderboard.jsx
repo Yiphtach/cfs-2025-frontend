@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getLeaderboard } from "../api/leaderboardApi";
+import { getLeaderboard } from "../api/apiClient";
 
 const Leaderboard = () => {
     const [leaderboard, setLeaderboard] = useState([]);
