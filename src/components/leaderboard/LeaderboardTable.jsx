@@ -1,33 +1,33 @@
 import PropTypes from "prop-types";
 
 const LeaderboardTable = ({ leaderboardData = [] }) => {
+    const getRankIcon = (rank) => {
+        if (rank === 1) return "🥇";
+        if (rank === 2) return "🥈";
+        if (rank === 3) return "🥉";
+        return rank;
+    };
+
     return (
-        <div className="w-full max-w-3xl mx-auto bg-gray-900 text-white p-4 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold text-center mb-4">Leaderboard</h2>
-            {leaderboardData.length === 0 ? (
-                <p className="text-center text-gray-400">No leaderboard data available.</p>
-            ) : (
-                <table className="w-full border-collapse border border-gray-700">
-                    <thead className="bg-red-600 text-white">
-                        <tr>
-                            <th className="p-2 border border-gray-700">Rank</th>
-                            <th className="p-2 border border-gray-700">Name</th>
-                            <th className="p-2 border border-gray-700">Score</th>
-                            <th className="p-2 border border-gray-700">Time</th>
+        <div className="w-full">
+            <table className="w-full border-collapse border border-gray-700">
+                <thead className="bg-red-600 text-white">
+                    <tr>
+                        <th className="p-2 border border-gray-700">Rank</th>
+                        <th className="p-2 border border-gray-700">Username</th>
+                        <th className="p-2 border border-gray-700">XP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {leaderboardData.map((user, index) => (
+                        <tr key={user.id} className="odd:bg-gray-800 even:bg-gray-700 text-center">
+                            <td className="p-2 border border-gray-700">{getRankIcon(index + 1)}</td>
+                            <td className="p-2 border border-gray-700">{user.username || "Unknown"}</td>
+                            <td className="p-2 border border-gray-700">{user.xp.toLocaleString()}</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {leaderboardData.map((entry, index) => (
-                            <tr key={entry.id || index} className="odd:bg-gray-800 even:bg-gray-700 text-center">
-                                <td className="p-2 border border-gray-700">{index + 1}</td>
-                                <td className="p-2 border border-gray-700">{entry.name || "Unknown"}</td>
-                                <td className="p-2 border border-gray-700">{entry.score.toLocaleString()}</td>
-                                <td className="p-2 border border-gray-700">{new Date(entry.time).toLocaleString()}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            )}
+                    ))}
+                </tbody>
+            </table>
         </div>
     );
 };
@@ -36,12 +36,11 @@ const LeaderboardTable = ({ leaderboardData = [] }) => {
 LeaderboardTable.propTypes = {
     leaderboardData: PropTypes.arrayOf(
         PropTypes.shape({
-            id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-            name: PropTypes.string.isRequired,
-            score: PropTypes.number.isRequired,
-            time: PropTypes.string.isRequired,
+            id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+            username: PropTypes.string.isRequired,
+            xp: PropTypes.number.isRequired,
         })
-    ),
+    ).isRequired,
 };
 
 export default LeaderboardTable;

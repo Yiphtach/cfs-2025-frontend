@@ -1,6 +1,14 @@
-import apiClient from './apiClient';
+import axios from "axios";
 
 const API_BASE_URL = 'https://superheroapi.com/api/e25a217cfe9babe1aae8ed7cd83112eb';
+
+// Set up the Axios instance with base URL
+const apiClient = axios.create({
+    baseURL: import.meta.env.VITE_API_URL || "http://localhost:3000/api",
+    headers: {
+        "Content-Type": "application/json",
+    },
+});
 
 // Fetch superhero details by ID
 export const fetchCharacterById = async (characterId) => {
@@ -82,13 +90,30 @@ export const searchCharacterByName = async (name) => {
     }
 };
 
-export const getUserSettings = async () => {}
+export const getUserSettings = async () => {
+    const response = await apiClient.get("/settings");
+    return response.data;
+}
 
-export const updateUserSettings = async () => {}
+export const updateUserSettings = async () => {
+    const response = await apiClient.put("/settings");
+    return response.data;
+}
 
-export const getLeaderboard = async () => {}
+export const getLeaderboard = async () => {
+    const response = await apiClient.get("/leaderboard");
+    return response.data;
+};
 
-export const getUserProfile = async () => {}
+export const getUserProfile = async () => {
+    const response = await apiClient.get("/profile");
+    return response.data;
+}
+
+export const getFighterById = async (id) => {
+    const { data } = await apiClient.get(`/id/${id}`);
+    return data;
+}
 
 export default {
     fetchCharacterById,
@@ -102,5 +127,7 @@ export default {
     getUserSettings,
     updateUserSettings,
     getLeaderboard,
-    getUserProfile
+    getUserProfile,
+    getFighterById,
+    apiClient
 };
